@@ -195,18 +195,18 @@ timeline.push(preload);
  var test_procedure_high = {
    timeline: [fixation, test],
    timeline_variables: [
-     { stimulus: 'images_1a/high_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
-     { stimulus: 'images_1a/high_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
-     { stimulus: 'images_1a/high_A_001.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
-     { stimulus: 'images_1a/high_A_010.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
+     { stimulus: 'stimuli/experiment1a/high_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
+     { stimulus: 'stimuli/experiment1a/high_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
+     { stimulus: 'stimuli/experiment1a/high_A_001.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
+     { stimulus: 'stimuli/experiment1a/high_A_010.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
 
 
 
 
-     { stimulus: 'images_1a/high_B_101.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
-     { stimulus: 'images_1a/high_B_110.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
-     { stimulus: 'images_1a/high_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
-     { stimulus: 'images_1a/high_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
+     { stimulus: 'stimuli/experiment1a/igh_B_101.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
+     { stimulus: 'stimuli/experiment1a/high_B_110.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
+     { stimulus: 'stimuli/experiment1a/high_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
+     { stimulus: 'stimuli/experiment1a/high_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
    ],
    repetitions: 2,
    randomize_order: true
@@ -219,18 +219,18 @@ timeline.push(preload);
  var test_procedure_low = {
    timeline: [fixation, test],
    timeline_variables: [
-     { stimulus: 'images_1a/low_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
-     { stimulus: 'images_1a/low_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
-     { stimulus: 'images_1a/low_A_001.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
-     { stimulus: 'images_1a/low_A_010.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
+     { stimulus: 'stimuli/experiment1a/low_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
+     { stimulus: 'stimuli/experiment1a/ow_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
+     { stimulus: 'stimuli/experiment1a/low_A_001.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
+     { stimulus: 'stimuli/experiment1a/low_A_010.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
 
 
 
 
-     { stimulus: 'images_1a/low_B_101.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
-     { stimulus: 'images_1a/low_B_110.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
-     { stimulus: 'images_1a/low_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
-     { stimulus: 'images_1a/low_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
+     { stimulus: 'stimuli/experiment1a/low_B_101.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
+     { stimulus: 'stimuli/experiment1a/low_B_110.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
+     { stimulus: 'stimuli/experiment1a/ow_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
+     { stimulus: 'stimuli/experiment1a/ow_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
    ],
    repetitions: 2,
    randomize_order: true
@@ -263,7 +263,16 @@ timeline.push(preload);
    timeline.push(test_procedure_low, test_block_1, test_procedure_low, test_block_2, test_procedure_low, test_block_3);
  }
 
-
+var post_experiment_survey = {
+   type: jsPsychSurveyText,
+   questions: [
+     { prompt: "Did you use any particular strategy when sorting the color wheels into categories?", name: "Strategy" },
+     { prompt: "Did you experience any technical issues when doing the experiment?", name: "Issues"},
+     { prompt: "What do you think this experiment was about?", name: "why_experiment"},
+     { prompt: "Is there anything else you want the experimentors to know about the experiment?", name: "Extra Info"}
+   ]
+};
+timeline.push(post_experiment_survey);
 
 
  // Fullscreen OFF + End
