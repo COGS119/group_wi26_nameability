@@ -1,246 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nameability</title>
-  <script src="https://unpkg.com/jspsych@8.2.3"></script>
-  <script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0"></script>
-  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
-  <script src="https://unpkg.com/@jspsych/plugin-categorize-image@2.1.0"></script>
-  <script src="https://unpkg.com/@jspsych/plugin-fullscreen@2.1.0"></script>
-  <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.1.0"></script>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Nameability</title>
+ <script src="https://unpkg.com/jspsych@8.2.3"></script>
+ <script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0"></script>
+ <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
+ <script src="https://unpkg.com/@jspsych/plugin-categorize-image@2.1.0"></script>
+ <script src="https://unpkg.com/@jspsych/plugin-fullscreen@2.1.0"></script>
+ <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.1.0"></script>
 
-  <link href="https://unpkg.com/jspsych@8.2.3/css/jspsych.css" rel="stylesheet" />
+
+
+
+ <link href="https://unpkg.com/jspsych@8.2.3/css/jspsych.css" rel="stylesheet" />
 </head>
+
+
+
 
 <body></body>
 
+
+
+
 <script>
-  // Init
-  var jsPsych = initJsPsych({
-    show_progress_bar: true,
-    auto_update_progress_bar: true,
-    on_finish: function () {
-      jsPsych.data.displayData('csv');
-    }
-  });
-
-
-  var timeline = [];
-
-
-  // Preload images
-  var preload = {
-    type: jsPsychPreload,
-    images: [
-      'stimuli/experiment1a/high_A_000.png',
-      'stimuli/experiment1a/high_A_001.png',
-      'stimuli/experiment1a/high_A_010.png',
-      'stimuli/experiment1a/high_B_101.png',
-      'stimuli/experiment1a/high_B_110.png',
-      'stimuli/experiment1a/high_B_111.png',
-      'stimuli/experiment1a/low_A_000.png',
-      'stimuli/experiment1a/low_A_001.png',
-      'stimuli/experiment1a/low_A_010.png',
-      'stimuli/experiment1a/low_B_101.png',
-      'stimuli/experiment1a/low_B_110.png',
-      'stimuli/experiment1a/low_B_111.png',
-    ],
-    show_detailed_errors: true,
-    max_load_time: 60000,
-    on_error: function (file) { console.error("PRELOAD ERROR:", file); },
-    on_success: function (file) { console.log("Loaded:", file); }
-  };
-  timeline.push(preload);
-
-
-  // Fullscreen ON
-  timeline.push({
-    type: jsPsychFullscreen,
-    fullscreen_mode: true
-  });
-
-
-  // Participant ID
-  var participant_id_entry = {
-    type: jsPsychSurveyText,
-    questions: [
-      { prompt: "Please enter your participant ID (e.g. p1):", name: "participant_id" }
-    ],
-    on_finish: function (data) {
-      jsPsych.data.addProperties({
-        participant: data.response.participant_id
-      });
-    }
-  };
-  timeline.push(participant_id_entry);
-
-
-  // Random condition assignment
-  var conditions = ["easy", "hard"];
-  var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(conditions, 1)[0];
-  console.log("Condition:", condition_assignment);
-
-
-  jsPsych.data.addProperties({
-    condition: condition_assignment
-  });
+ // Init
+ var jsPsych = initJsPsych({
+   show_progress_bar: true,
+   auto_update_progress_bar: true,
+   on_finish: function () {
+     jsPsych.data.displayData('csv');
+   }
+ });
 
 
 
-  // Instructions
-  var instructions = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: `
+
+ var timeline = [];
+
+
+
+
+ // Preload images
+ var preload = {
+ type: jsPsychPreload,
+ images: [
+   'stimuli/experiment1a/high_A_000.png',
+   'stimuli/experiment1a/high_A_001.png',
+   'stimuli/experiment1a/high_A_010.png',
+   'stimuli/experiment1a/high_B_101.png',
+   'stimuli/experiment1a/high_B_110.png',
+   'stimuli/experiment1a/high_B_111.png',
+   'stimuli/experiment1a/low_A_000.png',
+   'stimuli/experiment1a/low_A_001.png',
+   'stimuli/experiment1a/low_A_010.png',
+   'stimuli/experiment1a/low_B_101.png',
+   'stimuli/experiment1a/low_B_110.png',
+   'stimuli/experiment1a/low_B_111.png',
+ ],
+ show_detailed_errors: true,
+ max_load_time: 60000,
+ on_error: function(file) { console.error("PRELOAD ERROR:", file); },
+ on_success: function(file) { console.log("Loaded:", file); }
+};
+timeline.push(preload);
+
+
+
+
+ // Fullscreen ON
+ timeline.push({
+   type: jsPsychFullscreen,
+   fullscreen_mode: true
+ });
+
+
+
+
+ // Participant ID
+ var participant_id_entry = {
+   type: jsPsychSurveyText,
+   questions: [
+     { prompt: "Please enter your participant ID (e.g. p1):", name: "participant_id" }
+   ],
+   on_finish: function (data) {
+     jsPsych.data.addProperties({
+       participant: data.response.participant_id
+     });
+   }
+ };
+ timeline.push(participant_id_entry);
+
+
+
+
+ // Random condition assignment
+ var conditions = ["easy", "hard"];
+ var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(conditions, 1)[0];
+ console.log("Condition:", condition_assignment);
+
+
+
+
+ jsPsych.data.addProperties({
+   condition: condition_assignment
+ });
+
+
+
+
+
+
+
+
+ // Welcome (prototypes based on condition)
+
+
+
+
+
+
+
+
+
+
+// Instructions
+
+
+
+
+ var instructions = {
+   type: jsPsychHtmlKeyboardResponse,
+   stimulus: `
      <p>Your task is to categorize each color wheel into one of two categories as quickly and accurately as possible.</p>
      <p>You will receive feedback after each response.</p>
      <p><strong>Press A</strong> for Category A, <strong>Press B</strong> for Category B.</p>
      <p>Press any key to continue.</p>
    `
-  };
-  timeline.push(instructions);
+ };
+ timeline.push(instructions);
 
 
 
 
-  // Fixation
-  var fixation = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: '<div style="font-size:60px;">+</div>',
-    choices: "NO_KEYS",
-    trial_duration: 1000
-  };
 
 
 
 
-  // Categorization trial
-  // IMPORTANT:
-  // - choices must be 'a'/'b' (keyboard returns lowercase)
-  // - we display label A/B in text_answer for feedback
-  var test = {
-    type: jsPsychCategorizeImage,
-    stimulus: jsPsych.timelineVariable('stimulus'),
-    choices: ['a', 'b'],
-    key_answer: jsPsych.timelineVariable('correct_key'),
-    text_answer: jsPsych.timelineVariable('correct_label'),
+ // Fixation
+ var fixation = {
+   type: jsPsychHtmlKeyboardResponse,
+   stimulus: '<div style="font-size:60px;">+</div>',
+   choices: "NO_KEYS",
+   trial_duration: 1000
+ };
 
 
 
 
-    trial_duration: 10000,
-    prompt: "<p>Press <strong>A</strong> for Category A, <strong>B</strong> for Category B.</p>",
-    correct_text: "<p class='prompt'>Correct! The Category is %ANS%.</p>",
-    incorrect_text: "<p class='prompt'>Incorrect. The Category is %ANS%.</p>",
+ // Categorization trial
+ // IMPORTANT:
+ // - choices must be 'a'/'b' (keyboard returns lowercase)
+ // - we display label A/B in text_answer for feedback
+ var test = {
+   type: jsPsychCategorizeImage,
+   stimulus: jsPsych.timelineVariable('stimulus'),
+   choices: ['a', 'b'],
+   key_answer: jsPsych.timelineVariable('correct_key'),
+   text_answer: jsPsych.timelineVariable('correct_label'),
 
 
 
 
-    data: {
-      difficulty: jsPsych.timelineVariable('difficulty'),
-      correct_category: jsPsych.timelineVariable('correct_label')
-    }
-  };
+   trial_duration: 10000,
+   prompt: "<p>Press <strong>A</strong> for Category A, <strong>B</strong> for Category B.</p>",
+   correct_text: "<p class='prompt'>Correct! The Category is %ANS%.</p>",
+   incorrect_text: "<p class='prompt'>Incorrect. The Category is %ANS%.</p>",
 
 
 
 
-  // High (easy) procedure
-  var test_procedure_high = {
-    timeline: [fixation, test],
-    timeline_variables: [
-      { stimulus: 'stimuli/experiment1a/high_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
-      { stimulus: 'stimuli/experiment1a/high_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
-      { stimulus: 'stimuli/experiment1a/high_A_001.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
-      { stimulus: 'stimuli/experiment1a/high_A_010.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
-
-      { stimulus: 'stimuli/experiment1a/high_B_101.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
-      { stimulus: 'stimuli/experiment1a/high_B_110.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
-      { stimulus: 'stimuli/experiment1a/high_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
-      { stimulus: 'stimuli/experiment1a/high_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
-    ],
-    randomize_order: true
-  };
+   data: {
+     difficulty: jsPsych.timelineVariable('difficulty'),
+     correct_category: jsPsych.timelineVariable('correct_label')
+   }
+ };
 
 
 
-  // Low (hard) procedure 
-  var test_procedure_low = {
-    timeline: [fixation, test],
-    timeline_variables: [
-      { stimulus: 'stimuli/experiment1a/low_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
-      { stimulus: 'stimuli/experiment1a/low_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
-      { stimulus: 'stimuli/experiment1a/low_A_001.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
-      { stimulus: 'stimuli/experiment1a/low_A_010.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
 
-      { stimulus: 'stimuli/experiment1a/low_B_101.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
-      { stimulus: 'stimuli/experiment1a/low_B_110.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
-      { stimulus: 'stimuli/experiment1a/low_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
-      { stimulus: 'stimuli/experiment1a/low_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
-    ],
-    randomize_order: true
-  };
+ // High (easy) procedure
+ var test_procedure_high = {
+   timeline: [fixation, test],
+   timeline_variables: [
+     { stimulus: 'stimuli/experiment1a/high_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
+     { stimulus: 'stimuli/experiment1a/high_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
+     { stimulus: 'stimuli/experiment1a/high_A_001.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
+     { stimulus: 'stimuli/experiment1a/high_A_010.png', correct_key: 'a', correct_label: 'A', difficulty: 'high' },
 
 
 
-  // Block end screens
-  var test_block_1 = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: '<p><strong>TEST BLOCK 1 FINISHED</strong></p><p>Press any key to continue.</p>'
-  };
-  var test_block_2 = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: '<p><strong>TEST BLOCK 2 FINISHED</strong></p><p>Press any key to continue.</p>'
-  };
-  var test_block_3 = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: '<p><strong>TEST BLOCK 3 FINISHED</strong></p><p>Press any key to continue.</p>'
-  };
+
+     { stimulus: 'stimuli/experiment1a/igh_B_101.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
+     { stimulus: 'stimuli/experiment1a/high_B_110.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
+     { stimulus: 'stimuli/experiment1a/high_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
+     { stimulus: 'stimuli/experiment1a/high_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
+   ],
+   repetitions: 2,
+   randomize_order: true
+ };
 
 
-  // Push correct condition blocks (3 blocks total)
-  if (condition_assignment === "easy") {//, test_procedure_high, test_block_2, test_procedure_high, test_block_3
-    timeline.push(test_procedure_high, test_block_1, test_procedure_high, test_block_2, test_procedure_high, test_block_3);
-  } else { //, test_procedure_low, test_block_2, test_procedure_low, test_block_3
-    timeline.push(test_procedure_low, test_block_1, test_procedure_low, test_block_2, test_procedure_low, test_block_3);
-  }
-
-  var post_experiment_survey = {
-    type: jsPsychSurveyText,
-    questions: [
-      { prompt: "Did you use any particular strategy when sorting the color wheels into categories?", name: "Strategy" },
-      { prompt: "Did you experience any technical issues when doing the experiment?", name: "Issues" },
-      { prompt: "What do you think this experiment was about?", name: "why_experiment" },
-      { prompt: "Is there anything else you want the experimentors to know about the experiment?", name: "Extra Info" }
-    ]
-  };
-  timeline.push(post_experiment_survey);
-
-  var debrief= {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: `
-     <p>Thank you for participating in this experiment!</p>
-     <p>The goal of this experiment is to investigate if more commonly used words are easier to categorize,<br> and so we want to see how good people can categorize common vs uncommon colors. </p>`
-  };
-  timeline.push(debrief);
 
 
-  // Fullscreen OFF + End
-  timeline.push({
-    type: jsPsychFullscreen,
-    fullscreen_mode: false
-  });
+ // Low (hard) procedure ( i dont know if ths runs properly)
+ var test_procedure_low = {
+   timeline: [fixation, test],
+   timeline_variables: [
+     { stimulus: 'stimuli/experiment1a/low_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
+     { stimulus: 'stimuli/experiment1a/ow_A_000.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
+     { stimulus: 'stimuli/experiment1a/low_A_001.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
+     { stimulus: 'stimuli/experiment1a/low_A_010.png', correct_key: 'a', correct_label: 'A', difficulty: 'low' },
 
 
-  timeline.push({
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: "<p>Done! Thanks for participating.</p><p>Press any key to view your data.</p>"
-  });
 
 
-  // Run
-  jsPsych.run(timeline);
+     { stimulus: 'stimuli/experiment1a/low_B_101.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
+     { stimulus: 'stimuli/experiment1a/low_B_110.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
+     { stimulus: 'stimuli/experiment1a/ow_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
+     { stimulus: 'stimuli/experiment1a/ow_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
+   ],
+   repetitions: 2,
+   randomize_order: true
+ };
+
+
+
+
+ // Block end screens
+ var test_block_1 = {
+   type: jsPsychHtmlKeyboardResponse,
+   stimulus: '<p><strong>TEST BLOCK 1 FINISHED</strong></p><p>Press any key to continue.</p>'
+ };
+ var test_block_2 = {
+   type: jsPsychHtmlKeyboardResponse,
+   stimulus: '<p><strong>TEST BLOCK 2 FINISHED</strong></p><p>Press any key to continue.</p>'
+ };
+ var test_block_3 = {
+   type: jsPsychHtmlKeyboardResponse,
+   stimulus: '<p><strong>TEST BLOCK 3 FINISHED</strong></p><p>Press any key to continue.</p>'
+ };
+
+
+
+
+ // Push correct condition blocks (3 blocks total)
+ if (condition_assignment === "easy") {
+   timeline.push(test_procedure_high, test_block_1, test_procedure_high, test_block_2, test_procedure_high, test_block_3);
+ } else {
+   timeline.push(test_procedure_low, test_block_1, test_procedure_low, test_block_2, test_procedure_low, test_block_3);
+ }
+
+var post_experiment_survey = {
+   type: jsPsychSurveyText,
+   questions: [
+     { prompt: "Did you use any particular strategy when sorting the color wheels into categories?", name: "Strategy" },
+     { prompt: "Did you experience any technical issues when doing the experiment?", name: "Issues"},
+     { prompt: "What do you think this experiment was about?", name: "why_experiment"},
+     { prompt: "Is there anything else you want the experimentors to know about the experiment?", name: "Extra Info"}
+   ]
+};
+timeline.push(post_experiment_survey);
+
+
+ // Fullscreen OFF + End
+ timeline.push({
+   type: jsPsychFullscreen,
+   fullscreen_mode: false
+ });
+
+
+
+
+ timeline.push({
+   type: jsPsychHtmlKeyboardResponse,
+   stimulus: "<p>Done! Thanks for participating.</p><p>Press any key to view your data.</p>"
+ });
+
+
+
+
+ // Run
+ jsPsych.run(timeline);
 </script>
 </html>
+
+
+
+
+
+
+
+
+
