@@ -7,6 +7,7 @@
  <script src="https://unpkg.com/jspsych@8.2.3"></script>
  <script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0"></script>
  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
+ <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.3" type="text/javascript"></script>
  <script src="https://unpkg.com/@jspsych/plugin-categorize-image@2.1.0"></script>
  <script src="https://unpkg.com/@jspsych/plugin-fullscreen@2.1.0"></script>
  <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.1.0"></script>
@@ -176,6 +177,19 @@ var test = {
    randomize_order: true,
  };
 
+<<<<<<< HEAD
+=======
+//comprehension check
+ var comprehension_check = {
+  type: jsPsychImageKeyboardResponse,
+  stimulus: 'stimuli/experiment1a/high_A_010.png',
+  choices: ['a', 'b'],
+  prompt: "<p><strong>Choose B if you are paying attention.</strong></p>"
+};
+
+
+
+>>>>>>> 5745f9cbab1586982e119b9c297d522c05e170ce
  // Low (hard) procedure 
  var test_procedure_low = {
    timeline: [fixation, test, if_node_a],
@@ -211,10 +225,17 @@ var test = {
 
 
  // Push correct condition blocks (3 blocks total)
+<<<<<<< HEAD
  if (condition_assignment === "easy") {//, test_procedure_high, test_block_2, test_procedure_high, test_block_3
    timeline.push(test_procedure_high, test_block_1, test_procedure_high, test_block_2, test_procedure_high, test_block_3);
  } else {//, test_procedure_low, test_block_2, test_procedure_low, test_block_3
    timeline.push(test_procedure_low, test_block_1, test_procedure_low, test_block_2, test_procedure_low, test_block_3);
+=======
+ if (condition_assignment === "easy") {
+   timeline.push(test_procedure_high, comprehension_check, test_block_1, test_procedure_high, comprehension_check, test_block_2, test_procedure_high, comprehension_check, test_block_3);
+ } else {
+   timeline.push(test_procedure_low, comprehension_check, test_block_1, test_procedure_low, comprehension_check, test_block_2, test_procedure_low, comprehension_check, test_block_3);
+>>>>>>> 5745f9cbab1586982e119b9c297d522c05e170ce
  }
 
  var post_experiment_survey = {
@@ -232,7 +253,7 @@ var test = {
    type: jsPsychHtmlKeyboardResponse,
    stimulus: `
      <p>Thank you for participating in this experiment!</p>
-     <p>The goal of this experiment is to investigate if more commonly used words are easier to categorize <br> and so we want to see how good people can categorize common vs uncommon colors. </p>
+     <p>The goal of this experiment is to investigate how our access to language affects learning. <br> In this case, categorization rates between patterns of color with high (common) or low (uncommon) nameability. </p>
    `
  };
  timeline.push(debrief);
@@ -249,10 +270,17 @@ var test = {
  });
 
 
+<<<<<<< HEAD
  // Run
+=======
+
+
+ // Run, good luck!
+>>>>>>> 5745f9cbab1586982e119b9c297d522c05e170ce
  jsPsych.run(timeline);
 </script>
 </html>
+
 
 
 
