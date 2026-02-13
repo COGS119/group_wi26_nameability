@@ -109,7 +109,13 @@
    choices: "NO_KEYS",
    trial_duration: 1000
  };
-
+ //test plugin
+ var balls = {
+   type: jsPsychHtmlKeyboardResponse,
+   stimulus: '<div style="font-size:60px;">balls</div>',
+   choices: "NO_KEYS",
+   trial_duration: 1000
+ };
 
  // Categorization trial
  // IMPORTANT:
@@ -134,11 +140,11 @@ var test = {
  };
 
  var if_node_a = {
-  timeline: [test],
+  timeline: [fixation, test],
   conditional_function: function(){
   var last_data = jsPsych.data.get().last(1).values()[0]; 
     if(last_data.correct){
-      console.log('CO RRECT: DONT REPEAT');
+      console.log('CORRECT: DONT REPEAT');
       return false; //Retry last trial
     }else{
       console.log('INCORRECT: REPEAT');
@@ -148,7 +154,7 @@ var test = {
  };
 
  var if_node_b = {
-  timeline: [test],
+  timeline: [fixation, test],
   conditional_function: function(){
   var last_data = jsPsych.data.get().last(1).values()[0]; 
     if(last_data.correct){
