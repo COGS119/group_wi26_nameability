@@ -177,8 +177,6 @@ var test = {
    randomize_order: true,
  };
 
-<<<<<<< HEAD
-=======
 //comprehension check
  var comprehension_check = {
   type: jsPsychImageKeyboardResponse,
@@ -189,7 +187,6 @@ var test = {
 
 
 
->>>>>>> 5745f9cbab1586982e119b9c297d522c05e170ce
  // Low (hard) procedure 
  var test_procedure_low = {
    timeline: [fixation, test, if_node_a],
@@ -225,17 +222,10 @@ var test = {
 
 
  // Push correct condition blocks (3 blocks total)
-<<<<<<< HEAD
- if (condition_assignment === "easy") {//, test_procedure_high, test_block_2, test_procedure_high, test_block_3
-   timeline.push(test_procedure_high, test_block_1, test_procedure_high, test_block_2, test_procedure_high, test_block_3);
- } else {//, test_procedure_low, test_block_2, test_procedure_low, test_block_3
-   timeline.push(test_procedure_low, test_block_1, test_procedure_low, test_block_2, test_procedure_low, test_block_3);
-=======
  if (condition_assignment === "easy") {
    timeline.push(test_procedure_high, comprehension_check, test_block_1, test_procedure_high, comprehension_check, test_block_2, test_procedure_high, comprehension_check, test_block_3);
  } else {
    timeline.push(test_procedure_low, comprehension_check, test_block_1, test_procedure_low, comprehension_check, test_block_2, test_procedure_low, comprehension_check, test_block_3);
->>>>>>> 5745f9cbab1586982e119b9c297d522c05e170ce
  }
 
  var post_experiment_survey = {
@@ -247,9 +237,9 @@ var test = {
      { prompt: "Is there anything else you want the experimentors to know about the experiment?", name: "Extra_info"}
    ]
  };
- timeline.push(post_experiment_survey);
+timeline.push(post_experiment_survey);
 
- var debrief= {
+var debrief= {
    type: jsPsychHtmlKeyboardResponse,
    stimulus: `
      <p>Thank you for participating in this experiment!</p>
@@ -270,13 +260,9 @@ var test = {
  });
 
 
-<<<<<<< HEAD
- // Run
-=======
 
 
  // Run, good luck!
->>>>>>> 5745f9cbab1586982e119b9c297d522c05e170ce
  jsPsych.run(timeline);
 </script>
 </html>
