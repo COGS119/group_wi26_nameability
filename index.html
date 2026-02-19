@@ -25,9 +25,9 @@
   var jsPsych = initJsPsych({
     show_progress_bar: true,
     auto_update_progress_bar: true,
-    on_finish: function () { //'csv'
-      jsPsych.data.displayData('csv');
-    }
+    // on_finish: function () { //'csv'
+    //   jsPsych.data.displayData('csv');
+    // }
   });
 
   var timeline = [];
@@ -292,7 +292,7 @@
 
   timeline.push({
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: "<p>Done! Thanks for participating.</p><p>Press any key to view your data.</p>"
+    stimulus: "<p>Done! Thanks for participating.</p>"
   });
 
 
