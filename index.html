@@ -164,19 +164,19 @@
   };
 
   //Loops test trial until correct
- var if_node_a = {
-    timeline: [fixation, test],
-    loop_function: function () {
-      var last_data = jsPsych.data.get().last(1).values()[0];
-      if (last_data.correct) {
-        console.log('CORRECT: DONT REPEAT');
-        return false; //Retry last trial
-      } else {
-        console.log('INCORRECT: REPEAT');
-        return true;
-      }
-    }
-  };
+//  var if_node_a = {
+//     timeline: [fixation, test],
+//     loop_function: function () {
+//       var last_data = jsPsych.data.get().last(1).values()[0];
+//       if (last_data.correct) {
+//         console.log('CORRECT: DONT REPEAT');
+//         return false; //Retry last trial
+//       } else {
+//         console.log('INCORRECT: REPEAT');
+//         return true;
+//       }
+//     }
+//   };
 
  var if_node_b = {
   timeline: [fixation, test],
@@ -193,7 +193,7 @@
   //difficulty might be misleading -> change to nameability: 'high' maybe
   // High (easy) procedure
   var test_procedure_high = {
-    timeline: [fixation, test, if_node_a],
+    timeline: [fixation, test],
     timeline_variables: [
       { stimulus: 'stimuli/experiment1a/high_A_000.png', correct_key: 'A', correct_label: 'A', difficulty: 'high' },
       { stimulus: 'stimuli/experiment1a/high_A_000.png', correct_key: 'A', correct_label: 'A', difficulty: 'high' },
@@ -208,7 +208,7 @@
     randomize_order: true,
 
   };var test_procedure_high2 = {
-    timeline: [fixation, test, if_node_a],
+    timeline: [fixation, test],
     timeline_variables: [
       { stimulus: 'stimuli/experiment1a/high_A_000.png', correct_key: 'B', correct_label: 'A', difficulty: 'high' },
       { stimulus: 'stimuli/experiment1a/high_A_000.png', correct_key: 'B', correct_label: 'A', difficulty: 'high' },
@@ -235,7 +235,7 @@
 
   // Low (hard) procedure 
   var test_procedure_low = {
-    timeline: [fixation, test, if_node_a],
+    timeline: [fixation, test],
     timeline_variables: [
       { stimulus: 'stimuli/experiment1a/low_A_000.png', correct_key: 'A', correct_label: 'A', difficulty: 'low' },
       { stimulus: 'stimuli/experiment1a/low_A_000.png', correct_key: 'A', correct_label: 'A', difficulty: 'low' },
@@ -251,7 +251,7 @@
   };
 
   var test_procedure_low2 = {
-    timeline: [fixation, test, if_node_a],
+    timeline: [fixation, test],
     timeline_variables: [
       { stimulus: 'stimuli/experiment1a/low_A_000.png', correct_key: 'B', correct_label: 'A', difficulty: 'low' },
       { stimulus: 'stimuli/experiment1a/low_A_000.png', correct_key: 'B', correct_label: 'A', difficulty: 'low' },
