@@ -251,16 +251,25 @@
     timeline.push(test_procedure_low, comprehension_check, test_block_1, test_procedure_low, comprehension_check, test_block_2, test_procedure_low, comprehension_check, test_block_3);
   }
 
-  var post_experiment_survey = {
+  var post_experiment_survey1 = {
     type: jsPsychSurveyText,
     questions: [
+      { prompt: "Are you a native English speaker?", name: "Language"},
+      { prompt: "Do you have any experience with art? If so what? ie. painting, acrylics, oil, watercolor", name:"Art_background"},
       { prompt: "Did you use any particular strategy when sorting the color wheels into categories?", name: "Strategy" },
-      { prompt: "Did you experience any technical issues when doing the experiment?", name: "Issues" },
-      { prompt: "What do you think this experiment was about?", name: "Why_experiment" },
-      { prompt: "Is there anything else you want the experimentors to know about the experiment?", name: "Extra_info" }
     ]
   };
-  timeline.push(post_experiment_survey);
+  timeline.push(post_experiment_survey1);
+
+  var post_experiment_survey2 = {
+    type: jsPsychSurveyText,
+    questions: [
+      { prompt: "Did you experience any technical issues when doing the experiment?", name: "Issues" },
+      { prompt: "What do you think this experiment was about?", name: "Why_experiment" },
+      { prompt: "Is there anything else you want the experimenters to know about the experiment?", name: "Extra_info" }
+    ]
+  };
+  timeline.push(post_experiment_survey2);
 
   //PLEASE KEEP FOR ALL FUTURE ITERATIONS
   //this portion of the code ensures that the data gets sent to be stored on OSF
