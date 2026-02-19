@@ -139,9 +139,10 @@ var test = {
   }
  };
 
+ //Loops test trial until correct
  var if_node_a = {
   timeline: [fixation, test],
-  conditional_function: function(){
+  loop_function: function(){
   var last_data = jsPsych.data.get().last(1).values()[0]; 
     if(last_data.correct){
       console.log('CORRECT: DONT REPEAT');
@@ -155,7 +156,7 @@ var test = {
 
  var if_node_b = {
   timeline: [fixation, test],
-  conditional_function: function(){
+  loop_function: function(){
   var last_data = jsPsych.data.get().last(1).values()[0]; 
     if(last_data.correct){
       return  console.log('CORRECT: DONT REPEAT')//Retry last trial
