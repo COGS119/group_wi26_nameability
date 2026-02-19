@@ -28,6 +28,9 @@
     on_finish: function () { //'csv'
       jsPsych.data.displayData('csv');
     }
+    // on_finish: function () { //'csv'
+    //   jsPsych.data.displayData('csv');
+    // }
   });
 
   var timeline = [];
@@ -96,6 +99,7 @@
 
   // Random condition assignment
   var conditions = ["easy", "hard"];
+  var conditions = ["easy","easy2","hard2","hard"];
   var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(conditions, 1)[0];
   console.log("Condition:", condition_assignment);
 
@@ -144,6 +148,7 @@
     choices: ['a', 'b'],
     key_answer: jsPsych.timelineVariable('correct_key'),
     text_answer: jsPsych.timelineVariable('correct_label'),
+    text_answer: jsPsych.timelineVariable('correct_key'),
     trial_duration: 10000,
 
     prompt: "<p>Press <strong>A</strong> for Category A, <strong>B</strong> for Category B.</p>",
@@ -157,8 +162,11 @@
   };
 
   var if_node_a = {
+  //Loops test trial until correct
+ var if_node_a = {
     timeline: [fixation, test],
     conditional_function: function () {
+    loop_function: function () {
       var last_data = jsPsych.data.get().last(1).values()[0];
       if (last_data.correct) {
         console.log('CORRECT: DONT REPEAT');
@@ -179,8 +187,18 @@
       } else {
         return console.log('INCORRECT: REPEAT')
       }
+ var if_node_b = {
+  timeline: [fixation, test],
+  loop_function: function(){
+  var last_data = jsPsych.data.get().last(1).values()[0]; 
+    if(last_data.correct){
+      return  console.log('CORRECT: DONT REPEAT')//Retry last trial
+    }else{
+      return console.log('INCORRECT: REPEAT')
     }
   };
+ }
+};
 
   //difficulty might be misleading -> change to nameability: 'high' maybe
   // High (easy) procedure
@@ -196,6 +214,30 @@
       { stimulus: 'stimuli/experiment1a/high_B_110.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
       { stimulus: 'stimuli/experiment1a/high_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
       { stimulus: 'stimuli/experiment1a/high_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'high' },
+      { stimulus: 'stimuli/experiment1a/high_A_000.png', correct_key: 'A', correct_label: 'A', difficulty: 'high' },
+      { stimulus: 'stimuli/experiment1a/high_A_000.png', correct_key: 'A', correct_label: 'A', difficulty: 'high' },
+      { stimulus: 'stimuli/experiment1a/high_A_001.png', correct_key: 'A', correct_label: 'A', difficulty: 'high' },
+      { stimulus: 'stimuli/experiment1a/high_A_010.png', correct_key: 'A', correct_label: 'A', difficulty: 'high' },
+
+      { stimulus: 'stimuli/experiment1a/high_B_101.png', correct_key: 'B', correct_label: 'B', difficulty: 'high' },
+      { stimulus: 'stimuli/experiment1a/high_B_110.png', correct_key: 'B', correct_label: 'B', difficulty: 'high' },
+      { stimulus: 'stimuli/experiment1a/high_B_111.png', correct_key: 'B', correct_label: 'B', difficulty: 'high' },
+      { stimulus: 'stimuli/experiment1a/high_B_111.png', correct_key: 'B', correct_label: 'B', difficulty: 'high' },
+    ],
+    randomize_order: true,
+
+  };var test_procedure_high2 = {
+    timeline: [fixation, test, if_node_a],
+    timeline_variables: [
+      { stimulus: 'stimuli/experiment1a/high_A_000.png', correct_key: 'B', correct_label: 'A', difficulty: 'high' },
+      { stimulus: 'stimuli/experiment1a/high_A_000.png', correct_key: 'B', correct_label: 'A', difficulty: 'high' },
+      { stimulus: 'stimuli/experiment1a/high_A_001.png', correct_key: 'B', correct_label: 'A', difficulty: 'high' },
+      { stimulus: 'stimuli/experiment1a/high_A_010.png', correct_key: 'B', correct_label: 'A', difficulty: 'high' },
+
+      { stimulus: 'stimuli/experiment1a/high_B_101.png', correct_key: 'A', correct_label: 'B', difficulty: 'high' },
+      { stimulus: 'stimuli/experiment1a/high_B_110.png', correct_key: 'A', correct_label: 'B', difficulty: 'high' },
+      { stimulus: 'stimuli/experiment1a/high_B_111.png', correct_key: 'A', correct_label: 'B', difficulty: 'high' },
+      { stimulus: 'stimuli/experiment1a/high_B_111.png', correct_key: 'A', correct_label: 'B', difficulty: 'high' },
     ],
     randomize_order: true,
   };
@@ -223,6 +265,31 @@
       { stimulus: 'stimuli/experiment1a/low_B_110.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
       { stimulus: 'stimuli/experiment1a/low_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
       { stimulus: 'stimuli/experiment1a/low_B_111.png', correct_key: 'b', correct_label: 'B', difficulty: 'low' },
+      { stimulus: 'stimuli/experiment1a/low_A_000.png', correct_key: 'A', correct_label: 'A', difficulty: 'low' },
+      { stimulus: 'stimuli/experiment1a/low_A_000.png', correct_key: 'A', correct_label: 'A', difficulty: 'low' },
+      { stimulus: 'stimuli/experiment1a/low_A_001.png', correct_key: 'A', correct_label: 'A', difficulty: 'low' },
+      { stimulus: 'stimuli/experiment1a/low_A_010.png', correct_key: 'A', correct_label: 'A', difficulty: 'low' },
+
+      { stimulus: 'stimuli/experiment1a/low_B_101.png', correct_key: 'B', correct_label: 'B', difficulty: 'low' },
+      { stimulus: 'stimuli/experiment1a/low_B_110.png', correct_key: 'B', correct_label: 'B', difficulty: 'low' },
+      { stimulus: 'stimuli/experiment1a/low_B_111.png', correct_key: 'B', correct_label: 'B', difficulty: 'low' },
+      { stimulus: 'stimuli/experiment1a/low_B_111.png', correct_key: 'B', correct_label: 'B', difficulty: 'low' },
+    ],
+    randomize_order: true,
+  };
+
+  var test_procedure_low2 = {
+    timeline: [fixation, test, if_node_a],
+    timeline_variables: [
+      { stimulus: 'stimuli/experiment1a/low_A_000.png', correct_key: 'B', correct_label: 'A', difficulty: 'low' },
+      { stimulus: 'stimuli/experiment1a/low_A_000.png', correct_key: 'B', correct_label: 'A', difficulty: 'low' },
+      { stimulus: 'stimuli/experiment1a/low_A_001.png', correct_key: 'B', correct_label: 'A', difficulty: 'low' },
+      { stimulus: 'stimuli/experiment1a/low_A_010.png', correct_key: 'B', correct_label: 'A', difficulty: 'low' },
+
+      { stimulus: 'stimuli/experiment1a/low_B_101.png', correct_key: 'A', correct_label: 'B', difficulty: 'low' },
+      { stimulus: 'stimuli/experiment1a/low_B_110.png', correct_key: 'A', correct_label: 'B', difficulty: 'low' },
+      { stimulus: 'stimuli/experiment1a/low_B_111.png', correct_key: 'A', correct_label: 'B', difficulty: 'low' },
+      { stimulus: 'stimuli/experiment1a/low_B_111.png', correct_key: 'A', correct_label: 'B', difficulty: 'low' },
     ],
     randomize_order: true,
   };
@@ -247,11 +314,21 @@
   // Push correct condition blocks (3 blocks total)
   if (condition_assignment === "easy") {
     timeline.push(test_procedure_high, comprehension_check, test_block_1, test_procedure_high, comprehension_check, test_block_2, test_procedure_high, comprehension_check, test_block_3);
+  } else if (condition_assignment === "easy2") {
+    timeline.push(test_procedure_high2, comprehension_check, test_block_1, test_procedure_high2, comprehension_check, test_block_2, test_procedure_high2, comprehension_check, test_block_3);
+  } else if (condition_assignment === "hard2") {
+    timeline.push(test_procedure_low2, comprehension_check, test_block_1, test_procedure_low2, comprehension_check, test_block_2, test_procedure_low2, comprehension_check, test_block_3);  
+  
   } else {
     timeline.push(test_procedure_low, comprehension_check, test_block_1, test_procedure_low, comprehension_check, test_block_2, test_procedure_low, comprehension_check, test_block_3);
   }
 
+<<<<<<< HEAD
   var post_experiment_survey1 = {
+=======
+
+  var post_experiment_survey = {
+>>>>>>> 8e50bc49825d597f25917de0ea867d4d8f7da136
     type: jsPsychSurveyText,
     questions: [
       { prompt: "Are you a native English speaker?", name: "Language"},
@@ -301,6 +378,7 @@
   timeline.push({
     type: jsPsychHtmlKeyboardResponse,
     stimulus: "<p>Done! Thanks for participating.</p><p>Press any key to view your data.</p>"
+    stimulus: "<p>Done! Thanks for participating.</p>"
   });
 
 
