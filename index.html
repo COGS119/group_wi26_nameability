@@ -110,7 +110,7 @@
   var instructions = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
-     <p>Welcome to the experiment! </p>
+     <p> Welcome to the experiment! </p>
 
 <p> In this experiment, you will see a series of images. </p>
 <p> Your task is to categorize each image into one of two categories (A and B) as quickly and accurately as possible. </p>
@@ -279,22 +279,60 @@
     type: jsPsychHtmlKeyboardResponse,
     stimulus: '<p><strong>TEST BLOCK 3 FINISHED</strong></p><p>Press any key to continue.</p>'
   };
+  var test_block_4 = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: '<p><strong>TEST BLOCK 4 FINISHED</strong></p><p>Press any key to continue.</p>'
+  };
+  var test_block_5 = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: '<p><strong>TEST BLOCK 5 FINISHED</strong></p><p>Press any key to continue.</p>'
+  };
+  var test_block_6 = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: '<p><strong>TEST BLOCK 6 FINISHED</strong></p><p>Press any key to continue.</p>'
+
+  };
 
 
 
-
-  // Push correct condition blocks (3 blocks total)
-  if (condition_assignment === "easy") {
-    timeline.push(test_procedure_high, comprehension_check, test_block_1, test_procedure_high, comprehension_check, test_block_2, test_procedure_high, comprehension_check, test_block_3);
-  } else if (condition_assignment === "easy2") {
-    timeline.push(test_procedure_high2, comprehension_check, test_block_1, test_procedure_high2, comprehension_check, test_block_2, test_procedure_high2, comprehension_check, test_block_3);
-  } else if (condition_assignment === "hard2") {
-    timeline.push(test_procedure_low2, comprehension_check, test_block_1, test_procedure_low2, comprehension_check, test_block_2, test_procedure_low2, comprehension_check, test_block_3);  
-  
-  } else {
-    timeline.push(test_procedure_low, comprehension_check, test_block_1, test_procedure_low, comprehension_check, test_block_2, test_procedure_low, comprehension_check, test_block_3);
-  }
-
+  // Push correct condition blocks (6 blocks total)
+if (condition_assignment === "easy") {
+  timeline.push(
+    test_procedure_high, comprehension_check, test_block_1,
+    test_procedure_high, comprehension_check, test_block_2,
+    test_procedure_high, comprehension_check, test_block_3,
+    test_procedure_high, comprehension_check, test_block_4,
+    test_procedure_high, comprehension_check, test_block_5,
+    test_procedure_high, comprehension_check, test_block_6
+  );
+} else if (condition_assignment === "easy2") {
+  timeline.push(
+    test_procedure_high2, comprehension_check, test_block_1,
+    test_procedure_high2, comprehension_check, test_block_2,
+    test_procedure_high2, comprehension_check, test_block_3,
+    test_procedure_high2, comprehension_check, test_block_4,
+    test_procedure_high2, comprehension_check, test_block_5,
+    test_procedure_high2, comprehension_check, test_block_6
+  );
+} else if (condition_assignment === "hard2") {
+  timeline.push(
+    test_procedure_low2, comprehension_check, test_block_1,
+    test_procedure_low2, comprehension_check, test_block_2,
+    test_procedure_low2, comprehension_check, test_block_3,
+    test_procedure_low2, comprehension_check, test_block_4,
+    test_procedure_low2, comprehension_check, test_block_5,
+    test_procedure_low2, comprehension_check, test_block_6
+  );
+} else {
+  timeline.push(
+    test_procedure_low, comprehension_check, test_block_1,
+    test_procedure_low, comprehension_check, test_block_2,
+    test_procedure_low, comprehension_check, test_block_3,
+    test_procedure_low, comprehension_check, test_block_4,
+    test_procedure_low, comprehension_check, test_block_5,
+    test_procedure_low, comprehension_check, test_block_6
+  );
+}
 
   var post_experiment_survey1 = {
   type: jsPsychSurveyText,
