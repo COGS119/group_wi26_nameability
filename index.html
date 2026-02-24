@@ -123,12 +123,12 @@
     type: jsPsychImageKeyboardResponse,
     stimulus: 'stimuli/experiment_check.webp',
     prompt: "<p><strong>Choose Q if you are paying attention.</strong></p>",
-    choices: 'q',
+    choices: ['q','a','b'],
   };
 
   var comprehension_check_feedback = {
     type: jsPsychHtmlKeyboardResponse,
-    trial_duration: 4000,
+    trial_duration: 2000,
     stimulus: function(){
       console.log(jsPsych.data.get().last(1).values()[0]);
       var last_trial_response = jsPsych.data.get().last(1).values()[0].response
@@ -145,7 +145,7 @@
     type: jsPsychHtmlKeyboardResponse,
     stimulus: '<div style="font-size:60px;">+</div>',
     choices: "NO_KEYS",
-    trial_duration: 1000
+    trial_duration: 500
   };
   //test plugin
   var balls = {
