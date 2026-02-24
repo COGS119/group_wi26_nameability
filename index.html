@@ -119,12 +119,26 @@
   };
   timeline.push(instructions);
 
-  var comprehension_check = {
+  var comprehension_check_test = {
     type: jsPsychImageKeyboardResponse,
     stimulus: 'stimuli/experiment_check.webp',
     prompt: "<p><strong>Choose Q if you are paying attention.</strong></p>",
     choices: 'q',
   };
+
+  var comprehension_check_feedback = {
+    type: jsPsychHtmlKeyboardResponse,
+    trial_duration: 4000,
+    stimulus: function(){
+      console.log(jsPsych.data.get().last(1).values()[0]);
+      var last_trial_response = jsPsych.data.get().last(1).values()[0].response
+      if (last_trial_response == 'q') {
+        return "<p>Fluffy blesses you. Good job!</p>"
+      } else {
+        return "<p>Fluffy is angered. Make sure to focus!</p>"
+      }
+    }
+  }
 
   // Fixation
   var fixation = {
@@ -287,39 +301,39 @@
   // Push correct condition blocks (6 blocks total)
 if (condition_assignment === "easy") {
   timeline.push(
-    test_procedure_high, comprehension_check, test_block_1,
-    test_procedure_high, comprehension_check, test_block_2,
-    test_procedure_high, comprehension_check, test_block_3,
-    test_procedure_high, comprehension_check, test_block_4,
-    test_procedure_high, comprehension_check, test_block_5,
-    test_procedure_high, comprehension_check, test_block_6
+    test_procedure_high, comprehension_check_test,comprehension_check_feedback, test_block_1,
+    test_procedure_high, comprehension_check_test,comprehension_check_feedback, test_block_2,
+    test_procedure_high, comprehension_check_test,comprehension_check_feedback, test_block_3,
+    test_procedure_high, comprehension_check_test,comprehension_check_feedback, test_block_4,
+    test_procedure_high, comprehension_check_test,comprehension_check_feedback, test_block_5,
+    test_procedure_high, comprehension_check_test,comprehension_check_feedback, test_block_6
   );
 } else if (condition_assignment === "easy2") {
   timeline.push(
-    test_procedure_high2, comprehension_check, test_block_1,
-    test_procedure_high2, comprehension_check, test_block_2,
-    test_procedure_high2, comprehension_check, test_block_3,
-    test_procedure_high2, comprehension_check, test_block_4,
-    test_procedure_high2, comprehension_check, test_block_5,
-    test_procedure_high2, comprehension_check, test_block_6
+    test_procedure_high2, comprehension_check_test,comprehension_check_feedback, test_block_1,
+    test_procedure_high2, comprehension_check_test,comprehension_check_feedback, test_block_2,
+    test_procedure_high2, comprehension_check_test,comprehension_check_feedback, test_block_3,
+    test_procedure_high2, comprehension_check_test,comprehension_check_feedback, test_block_4,
+    test_procedure_high2, comprehension_check_test,comprehension_check_feedback, test_block_5,
+    test_procedure_high2, comprehension_check_test,comprehension_check_feedback, test_block_6
   );
 } else if (condition_assignment === "hard2") {
   timeline.push(
-    test_procedure_low2, comprehension_check, test_block_1,
-    test_procedure_low2, comprehension_check, test_block_2,
-    test_procedure_low2, comprehension_check, test_block_3,
-    test_procedure_low2, comprehension_check, test_block_4,
-    test_procedure_low2, comprehension_check, test_block_5,
-    test_procedure_low2, comprehension_check, test_block_6
+    test_procedure_low2, comprehension_check_test,comprehension_check_feedback, test_block_1,
+    test_procedure_low2, comprehension_check_test,comprehension_check_feedback, test_block_2,
+    test_procedure_low2, comprehension_check_test,comprehension_check_feedback, test_block_3,
+    test_procedure_low2, comprehension_check_test,comprehension_check_feedback, test_block_4,
+    test_procedure_low2, comprehension_check_test,comprehension_check_feedback, test_block_5,
+    test_procedure_low2, comprehension_check_test,comprehension_check_feedback, test_block_6
   );
 } else {
   timeline.push(
-    test_procedure_low, comprehension_check, test_block_1,
-    test_procedure_low, comprehension_check, test_block_2,
-    test_procedure_low, comprehension_check, test_block_3,
-    test_procedure_low, comprehension_check, test_block_4,
-    test_procedure_low, comprehension_check, test_block_5,
-    test_procedure_low, comprehension_check, test_block_6
+    test_procedure_low, comprehension_check_test,comprehension_check_feedback, test_block_1,
+    test_procedure_low, comprehension_check_test,comprehension_check_feedback, test_block_2,
+    test_procedure_low, comprehension_check_test,comprehension_check_feedback, test_block_3,
+    test_procedure_low, comprehension_check_test,comprehension_check_feedback, test_block_4,
+    test_procedure_low, comprehension_check_test,comprehension_check_feedback, test_block_5,
+    test_procedure_low, comprehension_check_test,comprehension_check_feedback, test_block_6
   );
 }
 
