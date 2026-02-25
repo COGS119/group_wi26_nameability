@@ -24,12 +24,12 @@
   // Init
   var jsPsych = initJsPsych({
     show_progress_bar: true,
-    auto_update_progress_bar: true,
-    // on_finish: function () { //'csv'
-    //   jsPsych.data.displayData('csv');
-    // }
+    auto_update_progress_bar: false,
   });
 
+  //Global vars for progress bar
+  var expt_len = 51;
+  var expt_progress = 0;
   var timeline = [];
 
   //PLEASE KEEP FOR ALL FUTURE ITERATIONS
@@ -147,13 +147,6 @@
     choices: "NO_KEYS",
     trial_duration: 500
   };
-  //test plugin
-  var balls = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: '<div style="font-size:60px;">balls</div>',
-    choices: "NO_KEYS",
-    trial_duration: 1000
-  };
 
   // Categorization trial
   // IMPORTANT:
@@ -183,7 +176,8 @@
     loop_function: function () {
       var last_data = jsPsych.data.get().last(1).values()[0];
       if ((last_data.correct)){
-        //console.log(data.values()[0].response)
+        expt_progress += 1
+        jsPsych.progressBar.progress = expt_progress/expt_len
         console.log('CORRECT: DONT REPEAT');
         return false; //saying 'false' to loop
       } else {
@@ -193,7 +187,7 @@
     }
   }
 
-  //difficulty might be misleading -> change to nameability: 'high' maybe
+  // Difficulty might be misleading -> change to nameability: 'high' maybe
   // High (easy) procedure
   var test_procedure_high = {
     timeline: [fixation, loop_test],
@@ -225,16 +219,6 @@
     ],
     randomize_order: true,
   };
-
-  //comprehension check
-  // var comprehension_check = {
-  //   type: jsPsychImageKeyboardResponse,
-  //   stimulus: 'stimuli/experiment1a/high_A_010.png',
-  //   choices: ['a', 'b'],
-  //   prompt: "<p><strong>Choose B if you are paying attention.</strong></p>"
-  // };
-
-
 
   // Low (hard) procedure 
   var test_procedure_low = {
@@ -342,7 +326,7 @@ if (condition_assignment === "easy") {
   questions: [
     { prompt: "Are you a native English speaker?", name: "Language", rows: 3, columns: 80 },
     { prompt: "Do you have any experience with art? If so what? ie. painting, acrylics, oil, watercolor", name:"Art_background", rows: 6, columns: 80 },
-    { prompt: "Did you use any particular strategy when sorting the color wheels into categories?", name: "Strategy", rows: 6, columns: 80 },
+    { prompt: "Did you use any particular strategies when sorting the color wheels into categories? If so, what were they?", name: "Strategy", rows: 6, columns: 80 },
   ],
   on_load: function () {
     document.querySelectorAll(".jspsych-survey-text textarea").forEach((el) => {
@@ -352,6 +336,10 @@ if (condition_assignment === "easy") {
       el.style.padding = "12px 14px";
       el.style.boxSizing = "border-box";
     });
+  },
+  on_finish: function(){
+    expt_progress += 1
+    jsPsych.progressBar.progress = expt_progress/expt_len
   }
 };
 timeline.push(post_experiment_survey1);
@@ -371,6 +359,10 @@ var post_experiment_survey2 = {
       el.style.padding = "12px 14px";
       el.style.boxSizing = "border-box";
     });
+  },
+  on_finish: function(){
+    expt_progress += 1
+    jsPsych.progressBar.progress = expt_progress/expt_len
   }
 };
 timeline.push(post_experiment_survey2);
@@ -394,7 +386,11 @@ var debrief = {
         In this case, categorization rates between patterns of color with high (common) or low (uncommon) nameability.
       </p>
     </div>
-  `
+  `,
+  on_finish: function(){
+    expt_progress += 1
+    jsPsych.progressBar.progress = expt_progress/expt_len
+  }
 };
   timeline.push(debrief);
 
@@ -408,9 +404,6 @@ var debrief = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: "<p>Done! Thanks for participating.</p>"
   });
-
-
-
 
   // Run, good luck!
   jsPsych.run(timeline);
