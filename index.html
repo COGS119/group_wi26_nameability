@@ -145,9 +145,9 @@
         console.log(jsPsych.data.get().last(1).values()[0]);
         var last_trial_response = jsPsych.data.get().last(1).values()[0].response
         if (last_trial_response == 'q') {
-          return "<p>Fluffy blesses you. Good job!</p>"
+          return "<p>Fluffy blesses you. Good job!</p><p>Press any key to continue.</p>"
         } else {
-          return "<p>Fluffy is angered. Make sure to focus!</p>"
+          return "<p>Fluffy is angered. Make sure to focus!</p><p>Press any key to continue.</p>"
         }
       }
     }
