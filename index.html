@@ -170,7 +170,7 @@
       choices: ['a', 'b'],
       key_answer: jsPsych.timelineVariable('correct_key'),
       text_answer: jsPsych.timelineVariable('correct_key'),
-      trial_duration: 10000,
+      //trial_duration: 10000,
 
       prompt: "<p>Press <strong>A</strong> for Category A, <strong>B</strong> for Category B.</p>",
       correct_text: "<p class='prompt'>Correct! The Category is %ANS%.</p>",
@@ -178,7 +178,7 @@
 
       data: {
         nameability: jsPsych.timelineVariable('nameability'),
-        correct_category: jsPsych.timelineVariable('correct_label')
+        correct_category: jsPsych.timelineVariable('correct_key')
       }
     };
 
